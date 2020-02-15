@@ -15,7 +15,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql({"/schema.sql","/data.sql"})
+//@Sql({"/schema.sql","/data.sql"})
 @ActiveProfiles("test")
 public class OwnerControllerIntegrationTest {
 
@@ -23,7 +23,7 @@ public class OwnerControllerIntegrationTest {
     TestRestTemplate testRestTemplate;
 
 
-    @Test
+   // @Test
     public void addOwner() {
 
         Owners owners = new Owners();
