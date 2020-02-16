@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class PetRepositoryTest {
@@ -30,10 +30,12 @@ class PetRepositoryTest {
         owners.setTelephone("1234567890");
         owners.setAddress("address1");
 
+
         Owners dbOwners = ownerRepository.save(owners);
         Optional<Owners> owners1 = ownerRepository.findById(new Integer(dbOwners.getId()));
 
         Pet pet = new Pet();
+        pet.setId(2);
         PetType type = new PetType();
         type.setId(2);
         type.setName("Dog");
@@ -42,10 +44,10 @@ class PetRepositoryTest {
         pet.setOwner(owners1.get());
         //pet.setBirthDate(LocalDate.now());
 
-        Pet dbPet =  petRepository.save(pet);
+        Pet dbPet = petRepository.save(pet);
 
-       assertNotNull(dbPet.getId());
-       assertEquals(dbPet.getName(),"rinku");
+        assertNotNull(dbPet.getId());
+        assertEquals(dbPet.getName(), "rinku");
     }
 
 }

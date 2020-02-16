@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class VisitsRepositoryTest {
 
@@ -28,6 +26,7 @@ class VisitsRepositoryTest {
     public void saveVisits_shouldSaveVisits() {
 
         Owners owners = new Owners();
+        owners.setId(1);
         owners.setFirstName("testFirstName");
         owners.setLastName("testLastName");
         owners.setCity("city1");
@@ -46,18 +45,18 @@ class VisitsRepositoryTest {
         pet.setOwner(owners1.get());
         //pet.setBirthDate(LocalDate.now());
 
-        Pet dbPet =  petRepository.save(pet);
+        Pet dbPet = petRepository.save(pet);
 
-       // Pet pet = new Pet();
+        // Pet pet = new Pet();
 
         Visit visit = new Visit();
         visit.setDate(LocalDate.now());
         visit.setDescription("desc1");
         visit.setPet(dbPet);
 
-       Visit visit1 =  visitsRepository.save(visit);
+        Visit visit1 = visitsRepository.save(visit);
 
-       System.out.println(visit1);
+        System.out.println(visit1);
 
     }
 }

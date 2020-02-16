@@ -4,25 +4,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class VetsRepositoryTest {
 
     @Autowired
-    VetsRepository  vetsRepository;
+    VetsRepository vetsRepository;
 
     @Test
     public void getAllVets() {
-
-       List<Vet> vetList =  vetsRepository.findAll();
-
-       assertNotNull(vetList);
-       assertEquals(vetList.size(), 6);
+        List<Vet> vetList = vetsRepository.findAll();
+        assertEquals(vetList.size(), 6);
     }
 
     @Test

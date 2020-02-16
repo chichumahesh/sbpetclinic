@@ -1,22 +1,21 @@
 package com.sb.petclinic.sbpetclinic.owners;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class OwnerRepositoryTest {
 
     @Autowired
@@ -32,9 +31,8 @@ class OwnerRepositoryTest {
         owners.setCity("city1");
         owners.setTelephone("1234567890");
         owners.setAddress("address1");
-
         Owners owners1 = ownerRepository.save(owners);
-        assertNotNull(owners1.getId());
+        assertNotNull(owners1.getFirstName());
     }
 
 
@@ -63,10 +61,10 @@ class OwnerRepositoryTest {
         Owners dbOwner = ownerRepository.save(owners);
 
         assertNotNull(dbOwner);
-        assertEquals(dbOwner.getFirstName(),"testFirstName2");
+        assertEquals(dbOwner.getFirstName(), "testFirstName2");
         assertNotNull(dbOwner.getPets());
-        assertEquals(dbOwner.getPets().size(),1);
-        assertNotNull(dbOwner.getPets().iterator().next().getId());
+        assertEquals(dbOwner.getPets().size(), 1);
+        //assertNotNull(dbOwner.getPets().iterator().next().getId());
 
     }
 
@@ -83,38 +81,8 @@ class OwnerRepositoryTest {
 
         Owners owners1 = ownerRepository.save(owners);
 
-       Optional<Owners> owners2 = ownerRepository.findById(owners1.getId());
-       assertEquals(owners2.isPresent(), true);
-       assertEquals(owners2.get().getFirstName(),"testFirstName");
+        Optional<Owners> owners2 = ownerRepository.findById(owners1.getId());
+        assertEquals(owners2.isPresent(), true);
+        assertEquals(owners2.get().getFirstName(), "testFirstName");
     }
-
-
-//    @Test
-//    @Transactional
-//    public void updateOwnerInformation() {
-//
-//
-//
-//
-//        Optional<Owners> owners = ownerRepository.findById(new Integer(11));
-//
-//        Pet pet = new Pet();
-//        pet.setName("Doggy");
-//        pet.setBirthDate(LocalDate.now());
-//        pet.setOwner(owners.get());
-//        PetType type = new PetType();
-//        type.setId(2);
-//        type.setName("Dog");
-//        pet.setType(type);
-//
-//        Set<Pet> petSet = new HashSet<Pet>();
-//        petSet.add(pet);
-//        owners.get().setPets(petSet);
-//
-//        ownerRepository.save(owners.get());
-//
-//
-//
-//    }
-
 }
